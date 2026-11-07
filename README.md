@@ -80,7 +80,7 @@ node bin/patch.mjs build --asar <server.asar> --out <出力先>   # 起動試験
 
 | 識別子 | 意味 |
 |---|---|
-| `Always` / 空欄 | 常に発動 |
+| `常時`（元表記: `Always`）/ 空欄 | 常に発動 |
 | `terminalFocus` | ターミナルにフォーカスがあるとき |
 | `!terminalFocus` | ターミナルにフォーカスが**ない**とき（`!` = 否定） |
 | `previewFocus` | プレビューにフォーカスがあるとき |
@@ -103,3 +103,6 @@ node bin/patch.mjs build --asar <server.asar> --out <出力先>   # 起動試験
 ## ライセンス
 
 MIT — 詳細は [LICENSE](LICENSE) を参照。
+
+## 最後に
+※ DeepAI Codeに公式の多言語対応が実装された場合、本リポジトリはアーカイブします。そちらをご利用ください。
