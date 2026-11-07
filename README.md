@@ -105,4 +105,5 @@ node bin/patch.mjs build --asar <server.asar> --out <出力先>   # 起動試験
 MIT — 詳細は [LICENSE](LICENSE) を参照。
 
 ## 最後に
-※ DeepAI Codeに公式の多言語対応が実装された場合、本リポジトリはアーカイブします。そちらをご利用ください。
+
+DeepAI Codeに公式の多言語対応が実装された場合、本リポジトリはアーカイブします。そちらをご利用ください。
