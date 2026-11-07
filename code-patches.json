@@ -1,54 +1,54 @@
 [
 	{
-		"file": "apps/server/dist/client/assets/KeybindingsSettings.logic-BSVjs4RI.js",
+		"file": "apps/server/dist/client/assets/KeybindingsSettings.logic-o7Cxan79.js",
 		"find": "function P(e){if(e===`thread.settle`)return`Thread: Archive`;",
 		"replace": "var KB_JA={{KB_JA}};function P(e){if(KB_JA[e]!==void 0)return KB_JA[e];if(e===`thread.settle`)return`Thread: Archive`;",
-		"note": "Insert Japanese title lookup at the head of the keybinding title function (highest priority). {{KB_JA}} is substituted at build time from dictionaries/_keybinding-titles.json."
+		"note": "Insert Japanese title lookup at the head of the keybinding title function (highest priority). {{KB_JA}} is substituted at build time from dictionaries/_keybinding-titles.json. Filename updated for 0.3.20."
 	},
 	{
-		"file": "apps/server/dist/client/assets/KeybindingsSettings.logic-BSVjs4RI.js",
+		"file": "apps/server/dist/client/assets/KeybindingsSettings.logic-o7Cxan79.js",
 		"find": "`Run Script: ${F(r.slice(7,-4))}`",
 		"replace": "`スクリプト実行: ${F(r.slice(7,-4))}`",
 		"note": "Translate the Run Script title prefix (script name itself stays as-is)."
 	},
 	{
-		"file": "apps/server/dist/client/assets/settings.keybindings-7UEFGuN1.js",
+		"file": "apps/server/dist/client/assets/settings.keybindings-7rqH8HIS.js",
 		"find": "placeholder:`Always`",
 		"replace": "placeholder:`常時`",
 		"note": "When-clause input placeholder (display only)."
 	},
 	{
-		"file": "apps/server/dist/client/assets/settings.keybindings-7UEFGuN1.js",
+		"file": "apps/server/dist/client/assets/settings.keybindings-7rqH8HIS.js",
 		"find": "d=r||`Always`",
 		"replace": "d=r||`常時`",
 		"note": "Display fallback for empty when-clause (display only)."
 	},
 	{
-		"file": "apps/server/dist/client/assets/ChatMarkdown-q83plht2.js",
+		"file": "apps/server/dist/client/assets/ChatMarkdown-BqmU2NYg.js",
 		"find": "Open in ${Ai.get(e)??`Editor`}",
 		"replace": "${Ai.get(e)??`Editor`}で開く",
 		"note": "Open in <editor name> — reorder to Japanese word order (editor name is a product name, kept in English)."
 	},
 	{
-		"file": "apps/server/dist/client/assets/main-BCZteCYp.js",
+		"file": "apps/server/dist/client/assets/main-B8DFWH-1.js",
 		"find": "Open in ${yr}",
 		"replace": "${yr}で開く",
 		"note": "Command palette: Open in <editor name>."
 	},
 	{
-		"file": "apps/server/dist/client/assets/PreviewPanel-C19s1lbU.js",
+		"file": "apps/server/dist/client/assets/PreviewPanel-BYOrP2D6.js",
 		"find": "Open in ${oe}'s browser",
 		"replace": "${oe}のブラウザーで開く",
 		"note": "Open in <browser name>'s browser."
 	},
 	{
-		"file": "apps/server/dist/client/assets/settings.projects-Dow3aXHF.js",
+		"file": "apps/server/dist/client/assets/settings.projects-DiDOsptD.js",
 		"find": "Open in ${d}",
 		"replace": "${d}で開く",
 		"note": "Projects settings: Open in <editor name>."
 	},
 	{
-		"file": "apps/server/dist/client/assets/ThreadRouteView-C3XrWjuI.js",
+		"file": "apps/server/dist/client/assets/ThreadRouteView-DN8Xk5ap.js",
 		"find": "Open in ${M?.label??`editor`}",
 		"replace": "${M?.label??`editor`}で開く",
 		"note": "Sidebar: Open in <editor name> (VS Code etc.)."
