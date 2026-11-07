@@ -19,7 +19,8 @@
 | DeepAI Code | 状態 |
 |---|---|
 | 0.3.19 (Windows) | ✅ 動作確認済み |
-| 0.3.19 (Linux) | 🧪 検証中（下記参照） |
+| 0.3.19 (macOS) | 🧪 未検証（コードは対応済み。検証PR歓迎） |
+| Linux版アプリ | 実施不可（公式ダウンロードは現在Windows/Macのみ。将来の提供に備えてCLIは対応済み） |
 
 新しいバージョンが出たら `versions.json` を更新してPRをお願いします。
 
@@ -47,15 +48,12 @@ npx deepai-code-ja-patch status
 5. **起動試験**（ヘッドレスEdge/ChromeでUIを実際に起動し、JS例外を検査）— **合格するまで一切書き換えません**
 6. バックアップ作成 → 差し替え → ハッシュ照合（不一致なら自動復元）
 
-### Linux（実験的）
+### Linux / macOS について
 
-Linux版の動作はまだ検証が進んでいません。試して結果をissueで共有してもらえると助かります:
-
-- `/opt` 等への書き込みにはroot権限が必要な場合があります → `sudo node bin/patch.mjs apply`
-- インストール先が自動検出できない場合は `--resources /opt/.../resources` で指定
-- 起動試験にはChromium系ブラウザ（google-chrome / chromium / microsoft-edgeのいずれか）が必要です
+- 公式のダウンロードは現在 **Windows / Mac のみ**です。Linux版が提供された場合に備え、CLIはインストール先候補・Chromium検出・プロセスチェックに対応済みです
+- macOS版での動作はまだ検証されていません。動作確認・PRを歓迎します（`restore`で元に戻せます）
 - LinuxではElectronのasar改ざん検証が働かないため、ツールはヒューズ検出時に警告のみ出します
-- 元に戻す: `sudo node bin/patch.mjs restore`
+- Linux/macOSで `/opt` 等への書き込みに権限が必要な場合は `sudo` で実行してください
 
 ### 開発者向け
 
