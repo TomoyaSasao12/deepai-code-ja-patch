@@ -1,0 +1,13 @@
+{
+	"__meta": { "part": "sidebar / chat UI strings missed in earlier batches (git terms kept in English by request)" },
+	"Add project script": "プロジェクトスクリプトを追加",
+	"Add action": "アクションを追加",
+	"Context Window": "コンテキストウィンドウ",
+	"Compact context": "コンテキストを圧縮",
+	"Context compacts automatically when needed.": "必要に応じてコンテキストを自動的に圧縮します。",
+	"Open in editor": "エディターで開く",
+	"Open in integrated browser": "統合ブラウザーで開く",
+	"Open in system browser": "システムブラウザーで開く",
+	"Open in browser": "ブラウザーで開く",
+	"Open in file viewer": "ファイルビューアーで開く"
+}

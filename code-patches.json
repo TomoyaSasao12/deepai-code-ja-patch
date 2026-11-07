@@ -3,7 +3,7 @@
 		"file": "apps/server/dist/client/assets/KeybindingsSettings.logic-BSVjs4RI.js",
 		"find": "function P(e){if(e===`thread.settle`)return`Thread: Archive`;",
 		"replace": "var KB_JA={{KB_JA}};function P(e){if(KB_JA[e]!==void 0)return KB_JA[e];if(e===`thread.settle`)return`Thread: Archive`;",
-		"note": "Insert Japanese title lookup at the head of the keybinding title function (highest priority). {{KB_JA}} is substituted at build time from dictionaries/31-keybindings.json."
+		"note": "Insert Japanese title lookup at the head of the keybinding title function (highest priority). {{KB_JA}} is substituted at build time from dictionaries/_keybinding-titles.json."
 	},
 	{
 		"file": "apps/server/dist/client/assets/KeybindingsSettings.logic-BSVjs4RI.js",
@@ -22,5 +22,35 @@
 		"find": "d=r||`Always`",
 		"replace": "d=r||`常時`",
 		"note": "Display fallback for empty when-clause (display only)."
+	},
+	{
+		"file": "apps/server/dist/client/assets/ChatMarkdown-q83plht2.js",
+		"find": "Open in ${Ai.get(e)??`Editor`}",
+		"replace": "${Ai.get(e)??`Editor`}で開く",
+		"note": "Open in <editor name> — reorder to Japanese word order (editor name is a product name, kept in English)."
+	},
+	{
+		"file": "apps/server/dist/client/assets/main-BCZteCYp.js",
+		"find": "Open in ${yr}",
+		"replace": "${yr}で開く",
+		"note": "Command palette: Open in <editor name>."
+	},
+	{
+		"file": "apps/server/dist/client/assets/PreviewPanel-C19s1lbU.js",
+		"find": "Open in ${oe}'s browser",
+		"replace": "${oe}のブラウザーで開く",
+		"note": "Open in <browser name>'s browser."
+	},
+	{
+		"file": "apps/server/dist/client/assets/settings.projects-Dow3aXHF.js",
+		"find": "Open in ${d}",
+		"replace": "${d}で開く",
+		"note": "Projects settings: Open in <editor name>."
+	},
+	{
+		"file": "apps/server/dist/client/assets/ThreadRouteView-C3XrWjuI.js",
+		"find": "Open in ${M?.label??`editor`}",
+		"replace": "${M?.label??`editor`}で開く",
+		"note": "Sidebar: Open in <editor name> (VS Code etc.)."
 	}
 ]
