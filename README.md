@@ -18,7 +18,8 @@
 
 | DeepAI Code | 状態 |
 |---|---|
-| 0.3.19 | ✅ 動作確認済み |
+| 0.3.19 (Windows) | ✅ 動作確認済み |
+| 0.3.19 (Linux) | 🧪 検証中（下記参照） |
 
 新しいバージョンが出たら `versions.json` を更新してPRをお願いします。
 
@@ -45,6 +46,16 @@ npx deepai-code-ja-patch status
 4. あなたの `server.asar` からパッチ済みアーカイブを生成し、**全エントリのSHA-256を検証**
 5. **起動試験**（ヘッドレスEdge/ChromeでUIを実際に起動し、JS例外を検査）— **合格するまで一切書き換えません**
 6. バックアップ作成 → 差し替え → ハッシュ照合（不一致なら自動復元）
+
+### Linux（実験的）
+
+Linux版の動作はまだ検証が進んでいません。試して結果をissueで共有してもらえると助かります:
+
+- `/opt` 等への書き込みにはroot権限が必要な場合があります → `sudo node bin/patch.mjs apply`
+- インストール先が自動検出できない場合は `--resources /opt/.../resources` で指定
+- 起動試験にはChromium系ブラウザ（google-chrome / chromium / microsoft-edgeのいずれか）が必要です
+- LinuxではElectronのasar改ざん検証が働かないため、ツールはヒューズ検出時に警告のみ出します
+- 元に戻す: `sudo node bin/patch.mjs restore`
 
 ### 開発者向け
 

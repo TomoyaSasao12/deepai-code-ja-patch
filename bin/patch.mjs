@@ -242,7 +242,12 @@ async function bootProbe(asarPath, { timeoutMs = 20_000 } = {}) {
 		'C:/Program Files/Microsoft/Edge/Application/msedge.exe',
 		'C:/Program Files/Google/Chrome/Application/chrome.exe',
 		'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
-	] : ['/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge'];
+	] : [
+		'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+		'/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge',
+		'/usr/bin/google-chrome-stable', '/usr/bin/google-chrome', '/usr/bin/chromium',
+		'/usr/bin/chromium-browser', '/usr/bin/microsoft-edge', '/snap/bin/chromium',
+	];
 	const browser = candidates.find((p) => fs.existsSync(p));
 	if (!browser) return { skipped: true, reason: 'no Edge/Chrome found for the boot probe; install one or pass --skip-probe' };
 
@@ -315,6 +320,12 @@ async function cmdApply() {
 		die(`Installed version ${version} is not in the supported list (${Object.keys(versions.supported).join(', ')}). The dictionary may not match. Use --force to proceed anyway.`);
 	}
 	await assertNotRunning();
+
+	const fuse = checkAsarIntegrityFuse(resources);
+	if (fuse.checked && fuse.sentinelFound && fuse.asarIntegrityEnabled) {
+		if (process.platform === 'linux') log({ warning: 'asar integrity fuse is ENABLED in this build. Linux ignores it today, but verify the app starts after applying (patch.mjs restore if not).' });
+		else die('This build enforces asar integrity validation — a patched server.asar would refuse to load. Patching is not supported for this build.');
+	}
 
 	const outPath = path.join(os.tmpdir(), `ja-patch-${version}-${Date.now()}.asar`);
 	log(`[1/5] building patched archive from ${serverAsar} ...`);
@@ -392,10 +403,36 @@ async function assertNotRunning() {
 			const out = execFileSync('tasklist', ['/FI', 'IMAGENAME eq DeepAI Code.exe'], { encoding: 'utf8' });
 			if (out.includes('DeepAI Code.exe')) die('DeepAI Code is running. Close it completely (including the tray), then re-run.');
 		} else {
-			const out = execFileSync('pgrep', ['-f', 'DeepAI Code'], { encoding: 'utf8' });
+			let out = '';
+			try { out = execFileSync('pgrep', ['-f', 'DeepAI Code'], { encoding: 'utf8' }); } catch {}
+			if (!out.trim()) { try { out = execFileSync('pgrep', ['-f', 'deepai-code'], { encoding: 'utf8' }); } catch {} }
 			if (out.trim()) die('DeepAI Code is running. Close it completely, then re-run.');
 		}
 	} catch { /* process not found -> fine */ }
+}
+
+/**
+ * Check the Electron fuse wire in the main executable: if asar integrity
+ * validation is ENABLED, a patched server.asar will refuse to load.
+ * (Enforcement is macOS/Windows; Linux currently ignores it, so we only warn there.)
+ */
+function checkAsarIntegrityFuse(resources) {
+	const root = path.dirname(resources);
+	let exe = null;
+	try {
+		exe = fs.readdirSync(root)
+			.map((f) => path.join(root, f))
+			.filter((f) => { try { return fs.statSync(f).isFile(); } catch { return false; } })
+			.sort((a, b) => fs.statSync(b).size - fs.statSync(a).size)[0] ?? null;
+	} catch { return { checked: false, reason: 'cannot list install root' };
+	}
+	if (!exe) return { checked: false, reason: 'no files in install root' };
+	const buf = fs.readFileSync(exe);
+	const at = buf.indexOf(Buffer.from('dL7pKGdnNz796PbbjQWNKmHXBZz'));
+	if (at === -1) return { checked: true, sentinelFound: false, exe };
+	const bytes = [...buf.subarray(at + 27, at + 27 + 8)];
+	const asarIntegrityEnabled = bytes[4] === 1;
+	return { checked: true, sentinelFound: true, asarIntegrityEnabled, exe };
 }
 
 const commands = { apply: cmdApply, restore: cmdRestore, build: cmdBuild, status: cmdStatus };

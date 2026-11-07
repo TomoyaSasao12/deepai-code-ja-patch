@@ -5,6 +5,6 @@
 	"license": "MIT",
 	"bin": { "deepai-code-ja-patch": "bin/patch.mjs" },
 	"engines": { "node": ">=20" },
-	"repository": { "type": "git", "url": "TODO: your repo URL" },
+	"repository": { "type": "git", "url": "https://github.com/TomoyaSasao12/deepai-code-ja-patch" },
 	"keywords": ["deepai", "deepai-code", "japanese", "i18n", "patch"]
 }
