@@ -67,6 +67,41 @@ const fileIntegrity = (buf) => {
 	return { algorithm: 'SHA256', hash: sha256(buf), blockSize: BLOCK, blocks };
 };
 
+/**
+ * Detect whether the installed archive is already patched by this tool:
+ * the keybinding code patch injects a `var KB_JA=` marker into one client
+ * bundle. Scans client entries for that marker.
+ */
+function detectPatched(serverAsar) {
+	const MARKER = 'var KB_JA=';
+	const { fd, dataStart, header } = readHeader(serverAsar);
+	let found = false;
+	const walk = (tree, base = '') => {
+		for (const [name, e] of Object.entries(tree.files ?? {})) {
+			if (found) return;
+			const p = base ? `${base}/${name}` : name;
+			if (e.files) { walk(e, p); continue; }
+			if (!p.startsWith('apps/server/dist/client/') || e.unpacked || e.link || !p.endsWith('.js')) continue;
+			let at = dataStart + Number(e.offset);
+			let remaining = Number(e.size);
+			let tail = Buffer.alloc(0);
+			const buf = Buffer.alloc(8 << 20);
+			while (remaining > 0) {
+				const n = fs.readSync(fd, buf, 0, Math.min(buf.length, remaining), at);
+				if (n === 0) break;
+				const data = Buffer.concat([tail, buf.subarray(0, n)]);
+				if (data.includes(MARKER)) { found = true; return; }
+				tail = data.subarray(data.length - 16);
+				at += n;
+				remaining -= n;
+			}
+		}
+	};
+	walk(header);
+	fs.closeSync(fd);
+	return found;
+}
+
 function installedVersion(appAsar) {
 	const { fd, dataStart, header } = readHeader(appAsar);
 	const entry = header.files?.['package.json'];
@@ -320,6 +355,18 @@ async function cmdApply() {
 		die(`Installed version ${version} is not in the supported list (${Object.keys(versions.supported).join(', ')}). The dictionary may not match. Use --force to proceed anyway.`);
 	}
 	await assertNotRunning();
+
+	// Re-apply handoff: if the installed archive is already patched, restore
+	// the newest backup first so `apply` is idempotent (no manual restore).
+	if (detectPatched(serverAsar)) {
+		const backupDir = path.join(resources, 'ja-patch-backups');
+		const all = fs.existsSync(backupDir) ? fs.readdirSync(backupDir).filter((f) => f.endsWith('.asar')).sort() : [];
+		const sameVersion = all.filter((f) => f.startsWith(`server-${version}-`));
+		const pick = sameVersion.length > 0 ? sameVersion[sameVersion.length - 1] : all[all.length - 1];
+		if (!pick) die('The installed server.asar is already patched, but no backup exists under ja-patch-backups. Restore from your own backup (the one you saved before first applying), or reinstall the app, then re-run apply.');
+		log(`[i/5] installed archive is already patched — auto-restoring newest backup ${pick} ...`);
+		fs.copyFileSync(path.join(backupDir, pick), serverAsar);
+	}
 
 	const fuse = checkAsarIntegrityFuse(resources);
 	if (fuse.checked && fuse.sentinelFound && fuse.asarIntegrityEnabled) {
