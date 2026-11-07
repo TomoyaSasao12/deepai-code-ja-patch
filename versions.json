@@ -1,0 +1,6 @@
+{
+	"$comment": "Versions of DeepAI Code desktop this dictionary set is known to work with. The CLI refuses unsupported versions unless --force is given.",
+	"supported": {
+		"0.3.19": { "status": "tested", "dictionaryRevision": 1 }
+	}
+}

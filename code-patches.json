@@ -1,0 +1,26 @@
+[
+	{
+		"file": "apps/server/dist/client/assets/KeybindingsSettings.logic-BSVjs4RI.js",
+		"find": "function P(e){if(e===`thread.settle`)return`Thread: Archive`;",
+		"replace": "var KB_JA={{KB_JA}};function P(e){if(KB_JA[e]!==void 0)return KB_JA[e];if(e===`thread.settle`)return`Thread: Archive`;",
+		"note": "Insert Japanese title lookup at the head of the keybinding title function (highest priority). {{KB_JA}} is substituted at build time from dictionaries/31-keybindings.json."
+	},
+	{
+		"file": "apps/server/dist/client/assets/KeybindingsSettings.logic-BSVjs4RI.js",
+		"find": "`Run Script: ${F(r.slice(7,-4))}`",
+		"replace": "`スクリプト実行: ${F(r.slice(7,-4))}`",
+		"note": "Translate the Run Script title prefix (script name itself stays as-is)."
+	},
+	{
+		"file": "apps/server/dist/client/assets/settings.keybindings-7UEFGuN1.js",
+		"find": "placeholder:`Always`",
+		"replace": "placeholder:`常時`",
+		"note": "When-clause input placeholder (display only)."
+	},
+	{
+		"file": "apps/server/dist/client/assets/settings.keybindings-7UEFGuN1.js",
+		"find": "d=r||`Always`",
+		"replace": "d=r||`常時`",
+		"note": "Display fallback for empty when-clause (display only)."
+	}
+]
