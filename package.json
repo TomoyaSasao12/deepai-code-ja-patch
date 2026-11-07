@@ -1,10 +1,23 @@
 {
 	"name": "deepai-code-ja-patch",
-	"version": "0.3.19-1",
+	"version": "0.3.20-1",
 	"description": "Unofficial Japanese UI patch for DeepAI Code desktop (Windows). Patches your locally installed app; nothing is redistributed.",
 	"license": "MIT",
-	"bin": { "deepai-code-ja-patch": "bin/patch.mjs" },
-	"engines": { "node": ">=20" },
-	"repository": { "type": "git", "url": "https://github.com/TomoyaSasao12/deepai-code-ja-patch" },
-	"keywords": ["deepai", "deepai-code", "japanese", "i18n", "patch"]
+	"bin": {
+		"deepai-code-ja-patch": "bin/patch.mjs"
+	},
+	"engines": {
+		"node": ">=20"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/TomoyaSasao12/deepai-code-ja-patch"
+	},
+	"keywords": [
+		"deepai",
+		"deepai-code",
+		"japanese",
+		"i18n",
+		"patch"
+	]
 }
