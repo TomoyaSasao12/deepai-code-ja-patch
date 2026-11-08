@@ -1,0 +1,12 @@
+{
+	"__meta": { "part": "workspace tab context menu and split view" },
+	"Split left": "左に分割",
+	"Split right": "右に分割",
+	"Split": "分割",
+	"Close tab": "タブを閉じる",
+	"Close other tabs": "他のタブを閉じる",
+	"Close tabs to the right": "右側のタブを閉じる",
+	"Unsplit all tabs": "すべての分割を解除",
+	"Close split group": "分割グループを閉じる",
+	"Split view navigation": "分割ビューのナビゲーション"
+}
