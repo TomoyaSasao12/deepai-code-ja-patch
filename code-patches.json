@@ -60,12 +60,6 @@
 		"note": "Dynamic tab menu: Close <tab title>."
 	},
 	{
-		"file": "apps/server/dist/client/assets/WorkspaceTabs-DSuFt_Hq.js",
-		"find": "Close ${e.title}",
-		"replace": "${e.title}を閉じる",
-		"note": "Dynamic tab menu: Close <tab title>."
-	},
-	{
 		"file": "apps/server/dist/client/assets/WorkspaceTabs-7CVkJou0.js",
 		"find": "Close ${t.title}",
 		"replace": "${t.title}を閉じる",
