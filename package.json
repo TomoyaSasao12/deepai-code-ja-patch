@@ -1,6 +1,6 @@
 {
 	"name": "deepai-code-ja-patch",
-	"version": "0.3.30-1",
+	"version": "0.3.36-1",
 	"description": "Unofficial Japanese UI patch for DeepAI Code desktop (Windows). Patches your locally installed app; nothing is redistributed.",
 	"license": "MIT",
 	"bin": {
