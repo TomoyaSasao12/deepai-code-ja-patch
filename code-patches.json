@@ -19,9 +19,9 @@
 	},
 	{
 		"file": "apps/server/dist/client/assets/settings.keybindings-C2yAZ5Sr.js",
-		"find": "f=r||`Always`",
-		"replace": "f=r||`常時`",
-		"note": "Display fallback for empty when-clause (variable renamed d->f in 0.3.30)."
+		"find": "d=r||`Always`",
+		"replace": "d=r||`常時`",
+		"note": "Display fallback for empty when-clause (var is d again in 0.3.36)."
 	},
 	{
 		"file": "apps/server/dist/client/assets/ChatMarkdown-DLT1EzYG.js",
