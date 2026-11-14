@@ -25,15 +25,15 @@
 	},
 	{
 		"file": "apps/server/dist/client/assets/ChatMarkdown-DLT1EzYG.js",
-		"find": "Open in ${ki.get(e)??`Editor`}",
-		"replace": "${ki.get(e)??`Editor`}で開く",
-		"note": "Open in <editor name> (helper renamed Ai->ki in 0.3.30)."
+		"find": "Open in ${Ai.get(e)??`Editor`}",
+		"replace": "${Ai.get(e)??`Editor`}で開く",
+		"note": "Open in <editor name> (helper is Ai again in 0.3.36)."
 	},
 	{
 		"file": "apps/server/dist/client/assets/main-8RQ3LlbJ.js",
-		"find": "Open in ${yr}",
-		"replace": "${yr}で開く",
-		"note": "Command palette: Open in <editor name>."
+		"find": "Open in ${br}",
+		"replace": "${br}で開く",
+		"note": "Command palette: Open in <editor name> (var br in 0.3.36)."
 	},
 	{
 		"file": "apps/server/dist/client/assets/PreviewPanel-DwMefKAG.js",
