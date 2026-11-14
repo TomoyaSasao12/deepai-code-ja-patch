@@ -1,0 +1,5 @@
+{
+	"__meta": { "part": "0.3.36 pairing UI rework (client-side leftovers)" },
+	"Enter a pairing code.": "ペアリングコードを入力してください。",
+	"Paste a one-time pairing code": "使い切りのペアリングコードを貼り付け"
+}
