@@ -179,6 +179,18 @@ function buildPatchedArchive(srcAsar, outPath, { quiet = false } = {}) {
 		}
 	}
 
+	// 2.5 runtime injection: translate-runtime (thinking-block translation via local LLM)
+	const runtimePath = path.join(ROOT, 'runtime', 'translate-runtime.js');
+	const indexPath = CLIENT_PREFIX + 'index.html';
+	if (fs.existsSync(runtimePath) && patched.has(indexPath)) {
+		const html = patched.get(indexPath).toString('utf8');
+		if (!html.includes('ja-patch-runtime')) {
+			const script = '<!-- ja-patch-runtime -->\n<script>\n' + fs.readFileSync(runtimePath, 'utf8') + '\n</script>';
+			if (!html.includes('</body>')) die('index.html has no </body> to inject the runtime before.');
+			patched.set(indexPath, Buffer.from(html.replace('</body>', script + '\n</body>'), 'utf8'));
+		}
+	}
+
 	// 3. repack: assign offsets in original tree order, stream-copy untouched payloads
 	const tasks = [];
 	let cursor = 0;
