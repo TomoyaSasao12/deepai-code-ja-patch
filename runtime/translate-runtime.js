@@ -52,8 +52,9 @@
 		try {
 			const r = await fetch(`${CFG.endpoint}/api/tags`);
 			state.models = (await r.json()).models?.map((m) => m.name) ?? [];
+			state.fetchFailed = false;
 			if (!state.model) state.model = CFG.modelPref.find((p) => state.models.some((m) => m.startsWith(p))) ?? state.models[0] ?? '';
-		} catch { state.models = []; }
+		} catch (e) { state.models = []; state.fetchFailed = true; state.fetchError = String(e?.message ?? e).slice(0, 60); }
 		return state.model;
 	}
 
@@ -185,8 +186,16 @@
 			b.textContent = state.on ? '訳:ON' : '訳:OFF';
 			b.style.cssText = 'font-weight:bold;color:' + (state.on ? '#9f7bff' : '#888');
 			const m = document.createElement('span');
-			m.textContent = state.model ? state.model : 'モデル未検出';
-			m.style.opacity = '0.7';
+			if (state.fetchFailed) {
+				m.textContent = 'Ollama未接続' + (state.fetchError ? ` (${state.fetchError})` : '');
+				m.style.color = '#f66';
+			} else if (!state.models.length) {
+				m.textContent = 'モデルなし (ollama pull して)';
+				m.style.color = '#f90';
+			} else {
+				m.textContent = state.model;
+				m.style.opacity = '0.7';
+			}
 			panelEl.append(b, m);
 		};
 		panelEl.onclick = () => { toggle(); draw(); };
@@ -204,7 +213,7 @@
 	window.__JA_T = {
 		async status() {
 			await refreshModels();
-			console.log({ on: state.on, model: state.model, models: state.models, cached: state.cache.size });
+			console.log({ on: state.on, model: state.model, models: state.models, fetchFailed: state.fetchFailed, fetchError: state.fetchError, cached: state.cache.size });
 		},
 		toggle,
 		async debug() {
