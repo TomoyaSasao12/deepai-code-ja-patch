@@ -12,57 +12,75 @@
 		"note": "Translate the Run Script title prefix (script name itself stays as-is)."
 	},
 	{
-		"file": "apps/server/dist/client/assets/settings.keybindings-C2yAZ5Sr.js",
+		"file": "apps/server/dist/client/assets/settings.keybindings-L_q9jdYq.js",
 		"find": "placeholder:`Always`",
 		"replace": "placeholder:`常時`",
 		"note": "When-clause input placeholder (display only)."
 	},
 	{
-		"file": "apps/server/dist/client/assets/settings.keybindings-C2yAZ5Sr.js",
+		"file": "apps/server/dist/client/assets/settings.keybindings-L_q9jdYq.js",
 		"find": "d=r||`Always`",
 		"replace": "d=r||`常時`",
 		"note": "Display fallback for empty when-clause (var is d again in 0.3.36)."
 	},
 	{
-		"file": "apps/server/dist/client/assets/ChatMarkdown-DLT1EzYG.js",
+		"file": "apps/server/dist/client/assets/ChatMarkdown-Du04hVtY.js",
 		"find": "Open in ${Ai.get(e)??`Editor`}",
 		"replace": "${Ai.get(e)??`Editor`}で開く",
 		"note": "Open in <editor name> (helper is Ai again in 0.3.36)."
 	},
 	{
-		"file": "apps/server/dist/client/assets/main-8RQ3LlbJ.js",
+		"file": "apps/server/dist/client/assets/main-C0I_6LA1.js",
 		"find": "Open in ${br}",
 		"replace": "${br}で開く",
 		"note": "Command palette: Open in <editor name> (var br in 0.3.36)."
 	},
 	{
-		"file": "apps/server/dist/client/assets/PreviewPanel-DwMefKAG.js",
+		"file": "apps/server/dist/client/assets/PreviewPanel-DoSsysMf.js",
 		"find": "Open in ${I}'s browser",
 		"replace": "${I}のブラウザーで開く",
 		"note": "Open in <browser name>'s browser (variable renamed in 0.3.30)."
 	},
 	{
-		"file": "apps/server/dist/client/assets/settings.projects-k7zTIUF5.js",
+		"file": "apps/server/dist/client/assets/settings.projects-B0uddlGi.js",
 		"find": "Open in ${d}",
 		"replace": "${d}で開く",
 		"note": "Projects settings: Open in <editor name>."
 	},
 	{
-		"file": "apps/server/dist/client/assets/ThreadRouteView-Bmjh3cEV.js",
+		"file": "apps/server/dist/client/assets/ThreadRouteView-D5J-hl3X.js",
 		"find": "Open in ${M?.label??`editor`}",
 		"replace": "${M?.label??`editor`}で開く",
 		"note": "Sidebar: Open in <editor name> (VS Code etc.)."
 	},
 	{
-		"file": "apps/server/dist/client/assets/WorkspaceTabs-CCnLeOaS.js",
+		"file": "apps/server/dist/client/assets/WorkspaceTabs-BCviADVo.js",
 		"find": "Close ${e.title}",
 		"replace": "${e.title}を閉じる",
 		"note": "Dynamic tab menu: Close <tab title>."
 	},
 	{
-		"file": "apps/server/dist/client/assets/WorkspaceTabs-CCnLeOaS.js",
+		"file": "apps/server/dist/client/assets/WorkspaceTabs-BCviADVo.js",
 		"find": "Close ${t.title}",
 		"replace": "${t.title}を閉じる",
 		"note": "Dynamic tab menu variant."
+	},
+	{
+		"file": "apps/server/dist/client/assets/ThreadRouteView-D5J-hl3X.js",
+		"find": "onClick:Nc,children:`Stop`",
+		"replace": "onClick:Nc,children:`停止`",
+		"note": "Stop button label. Bare Stop key is unsafe (mermaid semanticName:`Stop`), so patch this occurrence instead."
+	},
+	{
+		"file": "apps/server/dist/client/assets/ThreadRouteView-D5J-hl3X.js",
+		"find": "children:e_?`停止中...`:`Stop`",
+		"replace": "children:e_?`停止中...`:`停止`",
+		"note": "Stop/Stopping toggle. Find is post-dictionary text (Stopping... -> 停止中...)."
+	},
+	{
+		"file": "apps/server/dist/client/assets/PreviewPanel-DoSsysMf.js",
+		"find": "ve=r?`Stop`:`更新`",
+		"replace": "ve=r?`停止`:`更新`",
+		"note": "Preview stop/refresh toggle. Find is post-dictionary text (Refresh -> 更新)."
 	}
 ]
