@@ -429,6 +429,15 @@ async function cmdBuild() {
 	log(summary);
 }
 
+async function cmdProbe() {
+	const src = flag('--asar');
+	if (!src) die('probe requires --asar <path> to a built (patched) archive.');
+	const result = await bootProbe(path.resolve(src));
+	log(result);
+	if (result.skipped) process.exitCode = 2;
+	else if (result.rootChildren !== 1 || result.exceptionCount > 0) process.exitCode = 1;
+}
+
 function cmdStatus() {
 	const resources = findResources();
 	const serverAsar = path.join(resources, 'server.asar');
@@ -483,6 +492,6 @@ function checkAsarIntegrityFuse(resources) {
 	return { checked: true, sentinelFound: true, asarIntegrityEnabled, exe };
 }
 
-const commands = { apply: cmdApply, restore: cmdRestore, build: cmdBuild, status: cmdStatus };
+const commands = { apply: cmdApply, restore: cmdRestore, build: cmdBuild, probe: cmdProbe, status: cmdStatus };
 if (!commands[command]) die(`Unknown command "${command}". Use: ${Object.keys(commands).join(' | ')}`);
 await commands[command]();
