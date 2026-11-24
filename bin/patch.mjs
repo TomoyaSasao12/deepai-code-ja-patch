@@ -40,6 +40,7 @@ function findResources() {
 	const home = os.homedir();
 	const candidates = process.platform === 'win32' ? [
 		path.join(home, 'AppData', 'Local', 'Programs', 'deepai-code-desktop', 'resources'),
+		path.join('C:', 'Program Files', 'DeepAI Code', 'resources'),
 	] : [
 		'/Applications/DeepAI Code.app/Contents/Resources',
 		path.join(home, 'Applications', 'DeepAI Code.app', 'Contents', 'Resources'),
