@@ -73,8 +73,8 @@
 	},
 	{
 		"file": "apps/server/dist/client/assets/ThreadRouteView-CKe9ahRQ.js",
-		"find": "children:e_?`停止中...`:`Stop`",
-		"replace": "children:e_?`停止中...`:`停止`",
+		"find": "children:a_?`停止中...`:`Stop`",
+		"replace": "children:a_?`停止中...`:`停止`",
 		"note": "Stop/Stopping toggle. Find is post-dictionary text (Stopping... -> 停止中...)."
 	},
 	{
