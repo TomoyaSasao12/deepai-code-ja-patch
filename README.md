@@ -35,7 +35,16 @@
 
 要件: Node.js 20以上（依存パッケージなし）。EdgeまたはChromeがあると適用前に起動試験が自動で走ります。
 
-> **注**: アプリ v0.3.50 以降は `C:\Program Files\DeepAI Code\` にインストールされるため、**`apply` / `restore` は管理者権限の PowerShell から実行してください**（`status` は読み取りのみなので管理者不要です）。従来の `AppData` インストールでは不要です。
+> **注**: アプリ v0.3.50 以降は `C:\Program Files\DeepAI Code\` にインストールされるため、**`apply` / `restore` は管理者権限の PowerShell から実行してください**（管理者シェルでは起動試験が失敗することがあります）。推奨フロー:
+>
+> ```powershell
+> # 1) 通常権限でビルド＋起動試験
+> node bin\patch.mjs build --out .\probe-test.asar
+> node bin\patch.mjs probe --asar .\probe-test.asar
+>
+> # 2) 管理者権限で適用（試験済みなので probe をスキップ）
+> node bin\patch.mjs apply --skip-probe
+> ```
 
 ```powershell
 # 適用（バックアップ作成 → 差し替え）
