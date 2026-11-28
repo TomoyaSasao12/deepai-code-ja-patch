@@ -36,6 +36,10 @@
 		"0.3.52": {
 			"status": "tested",
 			"dictionaryRevision": 1
+		},
+		"0.3.53": {
+			"status": "tested",
+			"dictionaryRevision": 1
 		}
 	}
 }
